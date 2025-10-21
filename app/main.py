@@ -6,8 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import MongoDBConnectionManager
 from app.config import FastAPIConfig, CorsConfig, ENV
 
-from app.routers.sample.endpoints import router as sample_router
-
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -24,9 +22,7 @@ async def lifespan(_: FastAPI):
 app = FastAPI(**FastAPIConfig.dict(), lifespan=lifespan)
 
 
-# --------------------
 # CORS Middleware
-# --------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CorsConfig.origins,
@@ -37,9 +33,7 @@ app.add_middleware(
 )
 
 
-# --------------------
 # Healthcheck Endpoint
-# --------------------
 @app.get("/", tags=["Healthcheck"])
 def healthcheck():
     """
@@ -55,7 +49,4 @@ def healthcheck():
     return {"status": "ok", "name": app.title, "version": app.version, "env": ENV}
 
 
-# --------------------
 # Routers
-# --------------------
-app.include_router(sample_router, prefix="/sample")
