@@ -1,8 +1,13 @@
 # 🎟️ Ticketing API – FastAPI Event & Purchase System
 
+[![Version][ver-badge]][api-url]
+[![Status][status-badge]][api-url]
+
 FastAPI backend for managing **events**, **reservations**, and **purchases** in
 a simple ticket-selling platform. Includes MongoDB integration and async logic
 with Motor and httpx.
+
+(repo)
 
 ---
 
@@ -139,3 +144,18 @@ documents have it.
 demonstrate how to consume the API programmatically.
 * Ideal as a classroom or interview-level project for practicing React/Frontend
 consumption of async APIs.
+
+---
+
+## 📎 Enlaces
+
+- 🌐 **Producción:** [tickets.grye.org][api-url]
+- 📘 **Docs:** [tickets.grye.org/docs][docs-url]
+- 💻 **Repositorio:** [GitHub][github-repo]
+
+[api-url]: https://tickets.grye.org/
+[docs-url]: https://tickets.grye.org/docs
+[github-repo]: https://github.com/Awerito/ulatickets-api.git
+
+[ver-badge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftickets.grye.org%2F&query=%24.version&label=version&cacheSeconds=300&style=flat-square
+[status-badge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftickets.grye.org%2F&query=%24.status&label=tickets.grye.org&color=brightgreen&cacheSeconds=300&style=flat-square

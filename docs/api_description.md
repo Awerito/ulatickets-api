@@ -76,6 +76,12 @@ Cliente → GET /purchases/{id} → (Consulta compra)
 
 ## 🔗 Enlaces
 
+- 🌐 **Producción:** [tickets.grye.org][api-url]
+- 📘 **Docs:** [tickets.grye.org/docs][docs-url]
+- 💻 **Repositorio:** [GitHub][github-repo]
+
+## 📚 Referencias
+
 - [**MongoDB ObjectId**][oid] — Identificador único para documentos en MongoDB.  
 - [**REST API**][rest] — Definición y fundamentos del estilo arquitectónico REST.  
 - [**HTTP Methods**][http] — Métodos estándar utilizados en APIs REST (`GET`, `POST`, `PATCH`, `DELETE`).  
@@ -83,7 +89,9 @@ Cliente → GET /purchases/{id} → (Consulta compra)
 - [**ISO 8601**][iso8601] — Estándar internacional para fechas y horas.  
 - [**HTTP Status Codes**][status] — Códigos de estado que indican el resultado de una solicitud HTTP.
 
-
+[api-url]: https://tickets.grye.org/
+[docs-url]: https://tickets.grye.org/docs
+[github-repo]: https://github.com/Awerito/ulatickets-api.git
 [oid]: https://www.mongodb.com/docs/manual/reference/bson-types/#objectid  
 [rest]: https://developer.mozilla.org/en-US/docs/Glossary/REST  
 [http]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods  
