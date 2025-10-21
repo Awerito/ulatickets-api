@@ -1,28 +1,28 @@
-# 🏓 Inscription API - Table Tennis Tournament (Backend)
+# 🎟️ Ticketing API – FastAPI Event & Purchase System
 
-FastAPI backend for managing tournament participant registrations, category
-assignments, and Flow payment integration.
+FastAPI backend for managing **events**, **reservations**, and **purchases** in
+a simple ticket-selling platform. Includes MongoDB integration and async logic
+with Motor and httpx.
 
 ---
 
 ## 🚀 Requirements
 
-- Python 3.10+
-- PostgreSQL instance running
-- [Flow.cl](https://sandbox.flow.cl) sandbox account
-- `ngrok` (optional, for testing webhooks)
-- Docker (optional, for containerized setup)
+- Python 3.12+
+- MongoDB
+- Docker (optional)
+- `fastapi` CLI for dev mode (`pip install fastapi[standard]`)
 
 ---
 
 ## 🛠️ Setup (Local)
 
-### 1. Clone the repo
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Awerito/austral-tt-inscriptions.git
-cd inscriptions/backend
-```
+git clone https://github.com/Awerito/ulatickets.git
+cd ulatickets
+````
 
 ### 2. Create and activate virtualenv
 
@@ -39,100 +39,103 @@ pip install -r requirements.txt
 
 ---
 
-## ⚙️ Environment variables
+## ⚙️ Environment Variables
 
-Create a `.env` file:
+Create a `.env` file in the root folder:
 
 ```env
 ENV=dev
 
-POSTGRES_DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-
-FLOW_API_KEY_DEV=your_sandbox_api_key
-FLOW_SECRET_DEV=your_sandbox_secret
-FLOW_COMMERCE_ID_DEV=your_commerce_id
-
-FLOW_RETURN_URL_DEV=http://localhost:3000/payment/return
-FLOW_CALLBACK_URL_DEV=https://your-ngrok-url.ngrok-free.app/flow/confirmation
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB=ticketing
 ```
-
-> Replace `your-ngrok-url` with the output from `ngrok http 8000`
 
 ---
 
 ## 🧪 Run the API (Local)
 
 ```bash
-uvicorn app.main:app --reload
+fastapi dev --host 127.0.0.1 --port 8000
 ```
 
-> FastAPI will run on http://localhost:8000
+> The server runs at [http://127.0.0.1:8000](http://127.0.0.1:8000)
+> Interactive docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 🧩 Example Scripts
+
+### Populate with demo data
+
+```bash
+python -m scripts.bootstrap_data
+```
+
+Creates sample events, reservations, and a checkout to verify the flow.
+
+### Simulate random purchases
+
+```bash
+python -m scripts.simulate_purchases
+```
+
+Fetches events from the API and performs a couple of test reservations and
+checkouts.
 
 ---
 
 ## 🐳 Run with Docker
 
-### Build the image
+### Build image
 
 ```bash
-docker build -t inscriptions-backend .
+docker build -t ticketing-api .
 ```
 
-### Run the container with `.env`
+### Run container (using `.env`)
 
 ```bash
-docker run --env-file .env --network host -p 8000:8000 inscriptions-backend
+docker run --env-file .env --network host -p 8000:8000 ticketing-api
 ```
-
-> This assumes PostgreSQL is running on the host machine. Use Docker networking
-> or `docker-compose` otherwise.
 
 ---
 
-## 🌐 Expose your server (for Flow callbacks)
+## 📚 API Endpoints
 
-In another terminal:
+### Events
 
-```bash
-ngrok http 8000
-```
+* `GET /events` → list available events
+* `POST /events` → create new event
+* `PATCH /events/{id}` → update event
+* `DELETE /events/{id}` → remove event
 
-Update `.env` with your new `FLOW_CALLBACK_URL_DEV`.
+### Reservations
 
----
+* `POST /reservations` → create reservation
+* `GET /reservations/{id}` → view reservation
+* `DELETE /reservations/{id}` → cancel reservation
 
-## 📬 API Endpoints
+### Purchases
 
-### Registration
-
-- `POST /registrations` → creates registration and returns Flow payment URL
-
-### Flow webhook
-
-- `POST /flow/confirmation` → Flow sends payment confirmation here
-
-### Admin
-
-- `GET /admin/registrations`
-- `GET /admin/categories`
-- `POST /admin/categories`
-- `PUT /admin/categories/{id}`
-- `DELETE /admin/categories/{id}`
+* `POST /checkout` → confirm reservation and create purchase
+* `GET /purchases/{id}` → retrieve purchase details
 
 ---
 
-## ✅ Flow test card (sandbox)
+## 🧰 Tech Stack
 
-- Card: `4051885600446623`
-- Expiry: any valid date (e.g. 12/29)
-- CVV: `123`
-- RUT: `11.111.111-1`
-- Webpay key: `123`
+* **FastAPI** – web framework
+* **Motor (Async MongoDB)** – persistence layer
+* **httpx** – async HTTP client (used in demo scripts)
+* **Pydantic v2** – models and validation
 
 ---
 
 ## 📌 Notes
 
-- Use the same email registered in Flow sandbox for testing payments.
-- `getStatus` verification is skipped for now, webhook trust is based on token
-match.
+* Subdocuments (`tickets`, `items`) do not carry `_id`; only top-level
+documents have it.
+* The included `scripts/bootstrap_data.py` and `scripts/simulate_purchases.py`
+demonstrate how to consume the API programmatically.
+* Ideal as a classroom or interview-level project for practicing React/Frontend
+consumption of async APIs.
