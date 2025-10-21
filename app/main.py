@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import MongoDBConnectionManager
 from app.config import FastAPIConfig, CorsConfig, ENV
 
+from app.routers.tickets.endpoints import router as tickets_router
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -36,17 +38,8 @@ app.add_middleware(
 # Healthcheck Endpoint
 @app.get("/", tags=["Healthcheck"])
 def healthcheck():
-    """
-    Healthcheck endpoint.
-
-    Returns:
-        dict: Basic API status including:
-            - status: Always "ok" if the API is reachable.
-            - name: API name.
-            - version: Current API version.
-            - env: Current environment (dev, qa, prod).
-    """
     return {"status": "ok", "name": app.title, "version": app.version, "env": ENV}
 
 
 # Routers
+app.include_router(tickets_router)
