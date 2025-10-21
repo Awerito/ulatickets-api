@@ -15,6 +15,10 @@ class MongoBase(BaseModel):
         json_encoders = {ObjectId: str}
 
 
+class PatchResponse(BaseModel):
+    updated: bool
+
+
 def to_oid(value: str) -> ObjectId:
     """Convert string to ObjectId or raise HTTP 400."""
     try:

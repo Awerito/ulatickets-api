@@ -30,9 +30,8 @@ Thumbs.db
 .git/
 .gitignore
 
-# Tests and docs (optional)
+# Tests and scripts (optional)
 tests/
-docs/
 scripts/
 
 # Project root extras

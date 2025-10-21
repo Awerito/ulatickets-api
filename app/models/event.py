@@ -1,6 +1,5 @@
 from datetime import datetime
 from pydantic import Field, BaseModel
-from typing import List
 
 from app.models.common import MongoBase
 
@@ -17,4 +16,11 @@ class Event(MongoBase):
     date: datetime
     location: str
     image: str | None = None
-    tickets: List[TicketType] = Field(default_factory=list)
+    tickets: list[TicketType] = Field(default_factory=list)
+
+
+class PaginatedEvents(BaseModel):
+    data: list[Event]
+    page: int
+    limit: int
+    total: int
