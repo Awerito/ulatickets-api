@@ -1,4 +1,4 @@
-# 🎟️ Ticketing API — Flujo de Venta de Entradas
+# 🎟️ Flujo de Venta de Entradas
 
 Esta API sigue el estilo [REST][rest] utilizando [HTTP Methods][http] estándar
 (`GET`, `POST`, `PATCH`, `DELETE`) y formato [JSON][json] para la comunicación.
