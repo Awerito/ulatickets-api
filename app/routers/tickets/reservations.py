@@ -134,7 +134,8 @@ async def get_reservation(res_id: str):
         if (
             doc
             and doc["status"] == "PENDING"
-            and datetime.now(timezone.utc) > doc["expires_at"]
+            and datetime.now(timezone.utc)
+            > doc["expires_at"].replace(tzinfo=timezone.utc)
         ):
             await db.reservations.update_one(
                 {"_id": doc["_id"]}, {"$set": {"status": "EXPIRED"}}
