@@ -7,6 +7,7 @@ from app.database import MongoDBConnectionManager
 from app.config import FastAPIConfig, CorsConfig, ENV
 
 from app.routers.tickets.endpoints import router as tickets_router
+from app.scheduler import start_scheduler, stop_scheduler
 
 
 @asynccontextmanager
@@ -17,7 +18,12 @@ async def lifespan(_: FastAPI):
     # Check database connection on startup
     async with MongoDBConnectionManager() as db:
         pass
+
+    # Start scheduler
+    start_scheduler()
     yield
+    # Shutdown scheduler
+    stop_scheduler()
 
 
 # Initialize FastAPI application
