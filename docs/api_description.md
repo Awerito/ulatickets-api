@@ -1,5 +1,18 @@
 # 🎟️ Flujo de Venta de Entradas
 
+La API de **Tickets** permite gestionar todo el ciclo de vida de un
+evento y sus tickets, desde la creación hasta la compra final. Está diseñada
+para simular un flujo real de venta de entradas online, incluyendo la reserva
+temporal de tickets, el proceso de checkout y la emisión de comprobantes de
+compra.
+
+Con un enfoque simple pero realista, esta API facilita a los desarrolladores
+probar integraciones de frontend y backend que involucren manejo de stock,
+expiración de reservas y validación de pagos, todo dentro de un entorno RESTful
+con respuestas en formato JSON.
+
+<details>
+<summary>Click para expandir</summary>
 Esta API sigue el estilo [REST][rest] utilizando [HTTP Methods][http] estándar
 (`GET`, `POST`, `PATCH`, `DELETE`) y formato [JSON][json] para la comunicación.
 
@@ -88,6 +101,7 @@ Cliente → GET /purchases/{id} → (Consulta compra)
 - [**JSON Format**][json] — Formato de intercambio de datos entre cliente y servidor.  
 - [**ISO 8601**][iso8601] — Estándar internacional para fechas y horas.  
 - [**HTTP Status Codes**][status] — Códigos de estado que indican el resultado de una solicitud HTTP.
+</details>
 
 [api-url]: https://tickets.grye.org/
 [docs-url]: https://tickets.grye.org/docs
